@@ -1,8 +1,12 @@
 import java.util.Scanner;
+import java.text.SimpleDateFormat;import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
+
 
 public class main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ParseException {
 
         Scanner sc = new Scanner(System.in);
         int opcao;
@@ -27,6 +31,25 @@ public class main {
 
                 case 2 :
                 //Create
+
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy");
+
+                filme filme = new filme();
+                
+		        System.out.println("Digite o título do filme:  ");
+		        filme.setTitulo(sc.nextLine());
+
+		        System.out.println("Digite o gênero do filme:  ");
+		        filme.setGenero(sc.nextLine());
+
+		        System.out.println("Digite a nota do IMDB:  ");
+		        filme.setImdb(sc.nextFloat());
+
+		        System.out.println("digite o ano de lançamento do filme:  ");
+		        filme.setStartdate(formato.parse(sc.nextLine()));
+
+                Crud.create(filme);
+
                 break;
 
                 case 3 :
