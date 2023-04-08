@@ -56,13 +56,13 @@ public class Main {
                 Filmes filme = new Filmes();
                 
 		        System.out.println("Digite o título do filme:  ");
-		        filme.setTitulo(sc.nextLine());
+		        filme.setTitulo(sc.next());
+
+                System.out.println("Digite a nota do IMDB:  ");
+		        filme.setImdb(sc.nextFloat());
 
 		        System.out.println("Digite o gênero do filme:  ");
-		        filme.setGenero(sc.nextLine());
-
-		        System.out.println("Digite a nota do IMDB:  ");
-		        filme.setImdb(sc.nextFloat());
+		        filme.setGenero(sc.next());
 
 		        System.out.println("digite o ano de lançamento do filme:  ");
                 clearBuffer(sc);
