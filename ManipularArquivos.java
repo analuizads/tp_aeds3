@@ -141,6 +141,7 @@ public class ManipularArquivos {
 				} else {
 					
 					arq.readInt();
+					arq.readInt();
 					arq.readUTF();
 					arq.readFloat();
 					arq.readUTF();
