@@ -17,7 +17,7 @@ import java.util.Scanner;
  *
  */
 public class Main {
-// oi
+
 	/**Main method is responsible for creating FileReader and Scanners that will
 	 * be used in compress/decompress methods, and calls respective methods with
 	 * those objects as parameters.
