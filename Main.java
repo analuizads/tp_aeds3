@@ -95,6 +95,8 @@ public class Main {
 
                 case 5:
                 //Ordenação externa do arquivo
+
+    
                 break;
             }
 
