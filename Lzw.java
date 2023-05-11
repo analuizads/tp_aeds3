@@ -21,7 +21,7 @@ public class Lzw {
     
             while (repeat) {
                 Scanner input = new Scanner(System.in);
-                String option = opcao;
+                String option = opcaocd;
                 String compr = "Compressao";
                 w++;
     
