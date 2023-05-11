@@ -14,14 +14,14 @@ public class Lzw {
     * @param argsCOMP
     * @throws IOException 
     */
-    public static void algoritmo(String evidente) {
+    public static void algoritmo(String opcao) {
       
             boolean repeat = true;
             int w = 0;
     
             while (repeat) {
                 Scanner input = new Scanner(System.in);
-                String option = evidente;
+                String option = opcao;
                 String compr = "Compressao";
                 w++;
     
