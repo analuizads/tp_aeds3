@@ -37,12 +37,12 @@ public class Main {
 
         while(resp.equals("s")|| resp.equals("S")) {
 
-            System.out.println("Selecione a operação que deseja realizar: \n(1)Create \n(2)Read \n(3)Update \n(4)Delete \n(5) Compressao/Descompressao\n");
+            System.out.println("Selecione a operação que deseja realizar: \n(1)Create \n(2)Read \n(3)Update \n(4)Delete \n(5) Compressao  \n(6) Descompressao\n");
             opcao = sc.nextInt();
 
-            while (opcao < 1 || opcao > 5) {
+            while (opcao < 1 || opcao > 6) {
                 System.out.println("Número inválido!!");
-                System.out.println("Selecione a operação que deseja realizar:\n(1)Create \n(2)Read \n(3)Update \n(4)Delete \n(5) Compressao/Descompressao \n");
+                System.out.println("Selecione a operação que deseja realizar:\n(1)Create \n(2)Read \n(3)Update \n(4)Delete \n(5) Compressao  \n(6) Descompressao\n");
                 opcao = sc.nextInt();
             }
 
@@ -94,15 +94,19 @@ public class Main {
                 break;
 
                 case 5:
-                Lzw.main(args);
-
-
+                String evidente="COMPRIMIR";
+                Lzw.main(evidente);
+                break;
+                
+                case 6:
+                evidente="DESCOMPRIMIR";
+                Lzw.main(evidente);
+    
                 break;
             }
 
             System.out.println("Deseja realizar outra operação?");
             resp = sc.next();
-
         }
 
         sc.close();
