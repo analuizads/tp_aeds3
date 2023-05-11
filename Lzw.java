@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -15,61 +14,60 @@ public class Lzw {
     * @param argsCOMP
     * @throws IOException 
     */
-    public static void main(String[] args) {
-        boolean repeat = true;
-        int w = 0;
-
-        while (repeat) {
-            Scanner input = new Scanner(System.in);
-
-            System.out.println(" Deseja COMPRIMIR ou DESCOMPRIMIR?");
-            String option = input.nextLine().toUpperCase();
-            String compr = " Compressao";
-            w++;
-
-            try {
-                if (option.equals("COMPRIMIR")) {
-                    System.out.println("Coloque o local onde seu arquivo se encontra");
-                    String path = input.nextLine();
-                    File toCompress = new File(path);
-                    FileInputStream reader = new FileInputStream(toCompress);
-
-                    System.out.println("Qual nome do seu arquivo?");
-                    String compressedFileName = input.nextLine();
-                    compressedFileName = compressedFileName.concat(compr).concat(String.valueOf(w));
-                    File compressedFile = new File(compressedFileName);
-
-                    System.out.println("Comprimindo arquivo, aguarde ..");
-                    compress(reader, compressedFileName);
-                    double ratio = getCompressionRatio(toCompress, compressedFile);
-
-                    System.out.println("O arquivo foi comprimido, a quantidade de reducao foi: " + NumberFormat.getPercentInstance().format(ratio));
-                } else if (option.equals("DESCOMPRIMIR")) {
-                    System.out.println("Coloque o local onde seu arquivo a ser descomprimido se encontra");
-                    String path = input.nextLine();
-                    FileInputStream in = new FileInputStream(path);
-                    System.out.println("Digite o nome e, se quiser, o caminho do arquivo a ser descomprimido");
-                    String filename = input.nextLine();
-                    decompress(in, filename);
-                } else {
-                    System.out.println("Comando inválido, tente novamente");
+    public static void main(String evidente) {
+      
+            boolean repeat = true;
+            int w = 0;
+    
+            while (repeat) {
+                Scanner input = new Scanner(System.in);
+                String option = evidente;
+                String compr = "Compressao";
+                w++;
+    
+                try {
+                    if (option.equals("COMPRIMIR")) {
+                        System.out.println("Coloque o local onde seu arquivo se encontra");
+                        String path = input.nextLine();
+                        File toCompress = new File(path);
+                        FileInputStream reader = new FileInputStream(toCompress);
+    
+                        System.out.println("Qual nome do seu arquivo?");
+                        String compressedFileName = input.nextLine();
+                        compressedFileName = compressedFileName.concat(compr).concat(String.valueOf(w));
+                        File compressedFile = new File(compressedFileName);
+    
+                        System.out.println("Comprimindo arquivo, aguarde ..");
+                        compress(reader, compressedFileName);
+                        double ratio = getCompressionRatio(toCompress, compressedFile);
+    
+                        System.out.println("O arquivo foi comprimido, a quantidade de reducao foi: " + NumberFormat.getPercentInstance().format(ratio));
+                    } else if (option.equals("DESCOMPRIMIR")) {
+                        System.out.println("Coloque o local onde seu arquivo a ser descomprimido se encontra");
+                        String path = input.nextLine();
+                        FileInputStream in = new FileInputStream(path);
+                        System.out.println("Digite o nome e, se quiser, o caminho do arquivo a ser descomprimido");
+                        String filename = input.nextLine();
+                        decompress(in, filename);
+                    } else {
+                        System.out.println("Comando inválido, tente novamente");
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
-            System.out.println("Deseja comprimir outro arquivo? SIM or NAO");
-            String ans = input.nextLine().toUpperCase();
-            if (ans.equals("NAO")) {
-                repeat = false;
-                System.out.println("Saindo do programa...");
-                input.close();
-            } else if (!ans.equals("SIM")) {
+                
+                  System.out.println("Deseja tentar de novo ?Digite  SIM ou NAO, em seguida digite o local que deseja compactar ou descompactar");
+                 String ans = input.nextLine().toUpperCase();
+                 if (ans.equals("NAO")) {
+                  System.out.println("Saindo do programa...");
+                     repeat = false;
+}               else if (!ans.equals("SIM")) {
                 System.out.println("Entrada inválida, saindo do programa");
-                input.close();
+}
             }
         }
-    }
+    
+    
 /**
 	 * comprimir, ele pega o arquivo a ser lido
 	 * construirá uma lista de caracteres  e olha se estao na lista de de strings. Se estiverem adiciona a sequencia ao codigo, senao
@@ -161,7 +159,7 @@ public class Lzw {
             String temp;  
             if (codeList.containsKey(c)) { /* se C esta na lsita  */
                 temp = codeList.get(c);   /* add c  na saida  */
-            } else if (c == i) { { /* SE NAO, deriva os caracteres correspondente  */
+            } else if (c == i)  { /* SE NAO, deriva os caracteres correspondente  */
                 temp = codeList.get(old) + codeList.get(old).charAt(0); /* obtem os caracteres do codigo antigo*/
             } else {
                 throw new IOException("Erro na descompressão: código inválido");
