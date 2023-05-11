@@ -14,7 +14,7 @@ public class Lzw {
     * @param argsCOMP
     * @throws IOException 
     */
-    public static void algoritmo(String opcao) {
+    public static void algoritmo(String opcaocd) {
       
             boolean repeat = true;
             int w = 0;
