@@ -95,12 +95,12 @@ public class Main {
 
                 case 5:
                 String evidente="COMPRIMIR";
-                Lzw.main(evidente);
+                Lzw.algoritmo(opcao);
                 break;
                 
                 case 6:
                 evidente="DESCOMPRIMIR";
-                Lzw.main(evidente);
+                Lzw.algoritmo(opcao);
     
                 break;
             }
