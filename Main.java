@@ -94,13 +94,13 @@ public class Main {
                 break;
 
                 case 5:
-                String opcao="COMPRIMIR";
-                Lzw.algoritmo(opcao);
+                String opcaocd="COMPRIMIR";
+                Lzw.algoritmo(opcaocd);
                 break;
                 
                 case 6:
-                opcao="DESCOMPRIMIR";
-                Lzw.algoritmo(opcao);
+                opcaocd="DESCOMPRIMIR";
+                Lzw.algoritmo(opcaocd);
     
                 break;
             }
