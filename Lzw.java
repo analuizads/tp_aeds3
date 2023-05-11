@@ -14,7 +14,7 @@ public class Lzw {
     * @param argsCOMP
     * @throws IOException 
     */
-    public static void main(String evidente) {
+    public static void algoritmo(String evidente) {
       
             boolean repeat = true;
             int w = 0;
