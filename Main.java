@@ -17,12 +17,9 @@ public class Main {
     public static void main(String[] args) throws IOException, ParseException, Exception {
 
         RandomAccessFile arq = new RandomAccessFile("arquivo_db/hexa.db", "rw");
+        System.out.println("PASSOU AQ");
         
-        if(arq.length() > 0) {
-
-        }
-        else {
-
+        if(arq.length() <= 0) {
             try {
                 Leitor_csv.leitor();
             }
