@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class Leitor_csv {
 
+
     public static void leitor() throws IOException, ParseException{
 
         File arquivoCSV = new File("C:/Users/Athem/Documents/tp_aeds3/FilmesDatabase.csv");
@@ -23,9 +24,9 @@ public class Leitor_csv {
 		
 			String linhaarquivo =new  String();
 			leitor.nextLine();
-			int i=0;
-			while(i<20)
-				{ i++;
+			
+			while(leitor.hasNext())
+				{
 				//split das linhas do csv
 				linhaarquivo=leitor.nextLine();
 				String[] valores = linhaarquivo.split(";");
