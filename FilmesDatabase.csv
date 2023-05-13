@@ -965,7 +965,7 @@ Id;nome;data;nota;tema
 963;Die Hard: With a Vengeance;1995;7.6;Action, Adventure, Thriller
 964;Dead Man;1995;7.6;Adventure, Drama, Fantasy
 965;The Bridges of Madison County;1995;7.6;Drama, Romance
-966;Apollo 13;PG;7.6;Adventure, Drama, History
+966;Apollo 13;1995;7.6;Adventure, Drama, History
 967;Trois couleurs: Blanc;1994;7.6;Comedy, Drama, Romance
 968;Falling Down;1993;7.6;Action, Crime, Drama
 969;Dazed and Confused;1993;7.6;Comedy
@@ -999,4 +999,3 @@ Id;nome;data;nota;tema
 997;From Here to Eternity;1953;7.6;Drama, Romance, War
 998;Lifeboat;1944;7.6;Drama, War
 999;The 39 Steps;1935;7.6;Crime, Mystery, Thriller
-Id;nome;data;nota;tema
