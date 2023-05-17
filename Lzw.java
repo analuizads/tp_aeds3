@@ -81,7 +81,6 @@ public class Lzw {
     public static void compress(FileInputStream reader, String name) throws IOException {
         /*Mapa has para armazenar sequencia de caracteres que virarao codigos  */
         HashMap<String, Integer> stringList = new HashMap<>();
-        /* contador de string */
 
         int i;
 	/* Inicializando a lista de string com os caracteres que esperamos  */
@@ -97,17 +96,19 @@ public class Lzw {
         int c;
         while ((c = reader.read()) != -1) {/*enquanto tem coisa pra ler*/
 		
+
             String temp = prefix.toString() + (char) c;
-		                                              /*constroi string atual + caractere lido */
+		                                              /*constroi string atual com prefixo + caractere lido */
             if (stringList.containsKey(temp)) {  /* se string temp estiver na lista */
-                prefix.append((char) c); /* Junta o prefixo ao proximo primeiro caractere */
+                prefix.append((char) c); /* Junta o prefixo atual mas o caracter lido*/
+		    /* atualiza o prefixo atual ao contatenado */
             } else {
                 int code = stringList.get(prefix.toString());
                 out.write(code);
                 stringList.put(temp, i); /* add  o temp na stringList */
                 i++; /* increment o index da String lista */
 
-                prefix = new StringBuilder(Character.toString((char) c)); /* update  no prefix */
+                prefix = new StringBuilder(Character.toString((char) c)); /* update  no prefix  pra ser igual ao caracter lido*/
             }
 
             if (i >= 65536) {
@@ -115,9 +116,10 @@ public class Lzw {
             }
         }
 
-        if (!prefix.toString().equals("")) {
+        if (!prefix.toString().equals("")) { // verifica se houve arquivo q ainda n foi processado
             int code = stringList.get(prefix.toString());
             out.write(code);
+		//grava o codigo no  arrquivo de saida
         }
 
         reader.close();
