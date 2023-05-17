@@ -13,7 +13,7 @@ public class Leitor_csv {
 
     public static void leitor() throws IOException, ParseException{
 
-        File arquivoCSV = new File("C:/Users/Athem/Documents/tp_aeds3/FilmesDatabase.csv");
+        File arquivoCSV = new File("/home/anadiniz/Documentos/Faculdade/AEDs 3/tp_aeds3/FilmesDatabase.csv");
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy");
 
 		RandomAccessFile arq;
@@ -46,8 +46,6 @@ public class Leitor_csv {
 			
 				Escrita_db.escrita(filme1);
 				//leitura do arquivo em byte no hexa.db
-				//filme filme2 = new filme();
-				//leitura(filme2);
 			}
 		}  
 		catch(FileNotFoundException e) { e.printStackTrace();
