@@ -17,7 +17,6 @@ public class Main {
     public static void main(String[] args) throws IOException, ParseException, Exception {
 
         RandomAccessFile arq = new RandomAccessFile("arquivo_db/hexa.db", "rw");
-        System.out.println("PASSOU AQ");
         
         if(arq.length() <= 0) {
             try {
@@ -34,12 +33,12 @@ public class Main {
 
         while(resp.equals("s")|| resp.equals("S")) {
 
-            System.out.println("Selecione a operação que deseja realizar: \n(1)Create \n(2)Read \n(3)Update \n(4)Delete \n(5) Compressao  \n(6) Descompressao\n");
+            System.out.println("Selecione a operação que deseja realizar: \n(1)Create \n(2)Read \n(3)Update \n(4)Delete \n(5)Compressao  \n(6)Descompressao\n");
             opcao = sc.nextInt();
 
             while (opcao < 1 || opcao > 6) {
                 System.out.println("Número inválido!!");
-                System.out.println("Selecione a operação que deseja realizar:\n(1)Create \n(2)Read \n(3)Update \n(4)Delete \n(5) Compressao  \n(6) Descompressao\n");
+                System.out.println("Selecione a operação que deseja realizar:\n(1)Create \n(2)Read \n(3)Update \n(4)Delete \n(5)Compressão  \n(6)Descompressão\n");
                 opcao = sc.nextInt();
             }
 
