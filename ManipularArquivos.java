@@ -175,4 +175,81 @@ public class ManipularArquivos {
 		return filme;
 	}
 
+	public static long pesquisarNoIndex(int id) {
+		long ponteiro = -1;
+		Index index = new Index();
+		byte[]ba = new byte[12];
+		try {
+			RandomAccessFile indice = new RandomAccessFile("arquivo_db/Index.db", "rw");
+			while (indice.getFilePointer() < indice.length()) {
+				indice.seek(indice.getFilePointer());
+				indice.read(ba);
+				index = index.FromByteArrayIndex(ba);
+				if(index.getId() == id) {
+					ponteiro = index.getPonteiro();
+					return ponteiro;
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return ponteiro;
+	}
+
+	public static void trocarPonteiroIndex(int id, long posicao) {
+		Index index = new Index();
+		byte[]ba = new byte[12];
+		try {
+			RandomAccessFile indice = new RandomAccessFile("arquivo_db/Index.db", "rw");
+			while (indice.getFilePointer() < indice.length()) {
+				long posAntiga = indice.getFilePointer();
+				indice.read(ba);
+				index = index.FromByteArrayIndex(ba);
+				if(index.getId() == id) {
+					indice.seek(posAntiga);
+					indice.readInt();
+					indice.writeLong(posicao);
+					break;
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+
+	//testa onde vai ser inserido obejto novo no update
+	public static void testarTamanho(int id, byte[] novoRegistro, long posicao) throws Exception {
+		RandomAccessFile arquivo = new RandomAccessFile("arquivo_db/hexa.db", "rw");
+		
+		arquivo.seek(posicao);
+		byte lapide = '*';
+		arquivo.readByte();
+		int tam = arquivo.readInt();
+		// se for menor ou igual -> escreve e mantem tamanho para não atrapalhar
+		// nas proximas leituras
+		// se tamanho for menor -> o restante "vira lixo"
+		if (novoRegistro.length <= tam) {
+			arquivo.write(novoRegistro);
+
+		} // se for maior -> escreve no final e preenche a lapide do registro antigo
+		else {
+			arquivo.writeByte(lapide);
+			long novoPonteiro = arquivo.length();
+			trocarPonteiroIndex(id, novoPonteiro);
+			arquivo.seek(novoPonteiro);
+			int tamNovoRegistro = novoRegistro.length;
+			arquivo.writeInt(tamNovoRegistro);
+			arquivo.write(novoRegistro);
+		}
+		arquivo.close();
+	}
+
 }
