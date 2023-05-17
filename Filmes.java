@@ -101,7 +101,7 @@ public class Filmes {
     return baos.toByteArray();
   }
     
-  public static void fromByteArray(byte[] ba) throws IOException, ParseException {
+  public static Filmes fromByteArray(byte[] ba) throws IOException, ParseException {
 
     ByteArrayInputStream bais = new ByteArrayInputStream(ba);
     DataInputStream dis = new DataInputStream(bais);
@@ -115,6 +115,8 @@ public class Filmes {
     filme.setGenero(dis.readUTF());
     filme.setStartdate(formato.parse(dis.readUTF()));
 
+    dis.close();
+    return filme;
   }
 }
 
