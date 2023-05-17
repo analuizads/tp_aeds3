@@ -36,42 +36,47 @@ public class Crud {
 
         RandomAccessFile arq = new RandomAccessFile("arquivo_db/hexa.db", "rw");
 
-        int verificar = ManipularArquivos.ProcuraId(id);
+        long verificar = ManipularArquivos.pesquisarNoIndex(id);
 
         //Verificar se o ID é válido, se retornar -1 é porque não é válido
-        if(verificar == -1) {
+        if(verificar != -1) {
 
-            System.out.println("ID inválido!!");
-            System.out.println("Digite outro ID: ");
-            id = sc.nextInt();
-            read(id);
+            arq.seek(verificar);
+            byte lapide = arq.readByte();
+            int tam = arq.readInt();
+			if (lapide != '*') {
+				byte[] ba = new byte[tam];
+				arq.read(ba);
+				System.out.println(Filmes.fromByteArray(ba));
+			}
+			else {
+				System.out.println("Arquivo excluido");
+				System.out.println("Digite novo ID valido: ");
+				read(sc.nextInt());
+			}
+            
         }
         else {
-            //Retornar a posição, enviando a opção do tamanho
-            long pos = ManipularArquivos.retornaPos(id, 2);
-            arq.seek(pos);
-            int tamanho = arq.readInt();
-            byte[] ba = new byte[tamanho];
-
-            Filmes f1 = ManipularArquivos.fromByteArrayPosicao(ba, pos);
-
-            System.out.println(f1);
+            System.out.print("Arquivo excluido ou não exite, ID maximo é: ");
+			arq.seek(0);
+			System.out.println(arq.readInt());
+			System.out.println("digite novo ID valido: ");
+			read(sc.nextInt());
         }
         arq.close();
     }
         
     public static void update(int id) throws IOException, Exception {
 
-        RandomAccessFile arq = new RandomAccessFile("arquivo_db/hexa.db", "rw");
-        Scanner sc = new Scanner(System.in);
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy");
 
         Filmes filme = new Filmes();
 
-        int verificar = ManipularArquivos.ProcuraId(id);
+        long verificar = ManipularArquivos.pesquisarNoIndex(id);
 
         if(verificar != -1) {
 
+            //Ler dados
             System.out.println("Digite o título do filme:  ");
 		    filme.setTitulo(sc.nextLine());
 
@@ -86,22 +91,10 @@ public class Crud {
             filme.setStartdate(formato.parse(sc.nextLine()));
 
             filme.setId(id);
+            //Testar tamanho do novo objeto e escrever
             byte[] novoRegistro = Filmes.toByteArray(filme);
-
-            long posicao = ManipularArquivos.retornaPos(id, 2);
-            arq.seek(posicao);
-            int tam = arq.readInt();
-            byte lapide = '*';
-            if (novoRegistro.length <= tam) {
-                posicao = ManipularArquivos.retornaPos(id, 1);
-                arq.write(novoRegistro);
-    
-            } else {
-                arq.seek(ManipularArquivos.retornaPos(id, 2));
-                arq.writeByte(lapide);
-                arq.seek(arq.length());
-                arq.write(novoRegistro);
-            }
+            ManipularArquivos.testarTamanho(id, novoRegistro, verificar);
+            System.out.println("ID atualizado ");
             System.out.println(filme);
         }
 
@@ -109,7 +102,7 @@ public class Crud {
 
     public static void delete(int id) throws Exception {
 
-        int verificar = ManipularArquivos.ProcuraId(id);
+        long verificar = ManipularArquivos.pesquisarNoIndex(id);
 
         //Verificar se o ID é válido, se retornar -1 é porque não é válido
         if(verificar == -1) {
