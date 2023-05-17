@@ -66,11 +66,10 @@ public class Index {
 	public static void escritorIndex(Index indice) throws IOException {
 		// cria vetor de bytes
 
-		RandomAccessFile arquivo = new RandomAccessFile("dados/Index.db", "rw");
+		RandomAccessFile arquivo = new RandomAccessFile("arquivo_db/Index.db", "rw");
 		arquivo.seek(arquivo.length());
 		arquivo.writeInt(indice.getId());
 		arquivo.writeLong(indice.getPonteiro());
-		// System.out.println(ponteiro);
 		arquivo.close();
 	}
 
@@ -96,7 +95,7 @@ public class Index {
 		long indiceArqAux = 0;
 		int idArq = 0;
 		long pos = 0;
-		RandomAccessFile arquivo = new RandomAccessFile("dados/Index.db", "r");
+		RandomAccessFile arquivo = new RandomAccessFile("arquivo_db/Index.db", "r");
 		arquivo.seek(0);
 
 		while (true) {
@@ -104,7 +103,6 @@ public class Index {
 			indiceArqAux = arquivo.readLong();
 			if (arquivo.getFilePointer() != arquivo.length()) {
 
-				// System.out.println(idArq + " " + indiceArqAux);
 				Index indice = new Index(idArq, indiceArqAux);
 				ba = ToByteArrayIndex(indice);
 				if (id == idArq) {
@@ -121,6 +119,4 @@ public class Index {
 		arquivo.close();
 		return indiceArq;
 	}
-
-    
 }
