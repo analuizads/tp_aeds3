@@ -175,6 +175,7 @@ public class ManipularArquivos {
 		return filme;
 	}
 
+	//realiza uma pesquisa no arquivo de índice "Index.db" para encontrar um registro com um determinado id. Ele percorre o arquivo de índice, lendo os registros e verificando se o id corresponde ao id desejado
 	public static long pesquisarNoIndex(int id) {
 		long ponteiro = -1;
 		Index index = new Index();
@@ -185,10 +186,13 @@ public class ManipularArquivos {
 				indice.seek(indice.getFilePointer());
 				indice.read(ba);
 				index = index.FromByteArrayIndex(ba);
-				if(index.getId() == id) {
+				if(index.getId() == id) { //verificado se o id do objeto index é igual ao id passado como argumento. Se for igual, significa que encontramos o registro desejado.
 					ponteiro = index.getPonteiro();
 					return ponteiro;
+					//O ponteiro do objeto index é atribuído à variável ponteiro e o valor de ponteiro é retornado
 				}
+
+				//Se o id não for encontrado durante a pesquisa, o loop continua até o final do arquivo.
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -197,18 +201,22 @@ public class ManipularArquivos {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		//Se nenhum ponteiro for encontrado durante a pesquisa, a função retorna o valor -1, indicando que o registro não foi encontrado
 		return ponteiro;
 	}
-
+	
+	//realiza a troca do ponteiro associado a um registro no arquivo de índice "Index.db"
 	public static void trocarPonteiroIndex(int id, long posicao) {
 		Index index = new Index();
 		byte[]ba = new byte[12];
 		try {
 			RandomAccessFile indice = new RandomAccessFile("arquivo_db/Index.db", "rw");
+			//percorre o arquivo de índice, lendo os registros e verificando se o id corresponde ao id desejado.
 			while (indice.getFilePointer() < indice.length()) {
 				long posAntiga = indice.getFilePointer();
 				indice.read(ba);
 				index = index.FromByteArrayIndex(ba);
+				//Se encontrar uma correspondência, ele substitui o valor do ponteiro pelo valor fornecido em posicao. Após a troca do ponteiro, o loop é interrompido
 				if(index.getId() == id) {
 					indice.seek(posAntiga);
 					indice.readInt();
