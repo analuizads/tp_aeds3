@@ -41,7 +41,7 @@ public class Filmes {
 
   public String toString() {
     return "\nID: " + idFilme + 
-            "\nTítulo: " + titulo + 
+            "\nTítulo: " + CifraVigenere.textoOriginal(titulo) + 
             "\nIMDB: " + imdb + 
           "\nGenero: " +genero +
           "\nData: " + formato.format(startdate);  
