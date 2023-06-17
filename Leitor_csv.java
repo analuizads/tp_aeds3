@@ -24,7 +24,7 @@ public class Leitor_csv {
 		
 			String linhaarquivo =new  String();
 			leitor.nextLine();
-			
+			int i = 0;
 			while(leitor.hasNext())
 				{
 				//split das linhas do csv
@@ -36,13 +36,19 @@ public class Leitor_csv {
 				String startdate = (valores[2]);
 				Date date = formato.parse(startdate);
 				int id = Integer.parseInt(valores[0]);
+				//Criptografia
+                String cript=valores[1];
+
+                String criptografiaNome = CifraVigenere.criptografia(cript);
+
+				System.out.printf("Crip: %s", criptografiaNome);
 				
 				
 				// adicionando os conteudos no objeto e e escrevendo ele em byte
 				//contador=id, valores[1]=titulo 
 				// nota= float(nota do filme ) // valores[4]=generos do filme
 				
-				Filmes filme1 = new Filmes(id,valores[1],nota,valores[4], date);
+				Filmes filme1 = new Filmes(id,criptografiaNome,nota,valores[4], date);
 			
 				Escrita_db.escrita(filme1);
 				//leitura do arquivo em byte no hexa.db

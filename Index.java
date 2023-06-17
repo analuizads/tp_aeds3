@@ -65,7 +65,7 @@ public class Index {
 
 	}
 
-	//escreve um objeto do tipo Index em um arquivo binário chamado "Index.db". Cria um RandomAccessFile no modo de escrita e procura o fim do arquivo. Em seguida, ele escreve os valores dos atributos id e ponteiro no arquivo e fecha o arquivo.
+	//escreve um objeto do tipo Index em um arquivo chamado "Index.db". Cria um RandomAccessFile no modo de escrita e procura o fim do arquivo. Em seguida, ele escreve os valores dos atributos id e ponteiro no arquivo e fecha o arquivo.
 	public static void escritorIndex(Index indice) throws IOException {
 		// cria vetor de bytes
 

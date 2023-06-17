@@ -249,11 +249,13 @@ public class ManipularArquivos {
 
 		} // se for maior -> escreve no final e preenche a lapide do registro antigo
 		else {
+			arquivo.seek(posicao);
 			arquivo.writeByte(lapide);
 			long novoPonteiro = arquivo.length();
 			trocarPonteiroIndex(id, novoPonteiro);
 			arquivo.seek(novoPonteiro);
 			int tamNovoRegistro = novoRegistro.length;
+			arquivo.writeByte(' ');
 			arquivo.writeInt(tamNovoRegistro);
 			arquivo.write(novoRegistro);
 		}
